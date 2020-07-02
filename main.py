@@ -5,7 +5,7 @@ from views.game import GameView
 from game import Game
 
 import sys
-game_size = 85, 45
+game_size = 85, 85
 window_size = tuple([5*x for x in game_size])
 
 glider_coordinates = [
@@ -38,15 +38,16 @@ glider_gun = [
 
 ]
 
+infinite_growth_pattern = [
+    (0,5), (2,4), (2,5), (4,1),
+    (4,2), (4,3), (6,0), (6,1),
+    (6,2), (7,1)
+]
+
 def main():
-    #game = Game(game_size)
-    pass
-    #columns = 3
-    #rows = 3
-    #test_grid = Grid(rows , columns)
-    #print(test_grid.__str__())
-    #test_grid.getGridItem(2,2).toggle_living()
-    #print(test_grid.__str__())
+    gm = Game(game_size, 10000)
+    gm.load_coordinates_into_grid(infinite_growth_pattern)
+    gm.run_game(20)
 
 def test_view():
     rows, columns = game_size
@@ -59,8 +60,8 @@ def test_view():
         gv.update_screen(grid)
 
 def test_game():
-    gm = Game(game_size, 1000)
-    gm.load_coordinates_into_grid(glider_gun)
+    gm = Game(game_size, 10000)
+    gm.load_coordinates_into_grid(infinite_growth_pattern)
     gm.run_game(20)
 
 def test_carriage_return():

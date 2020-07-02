@@ -1,4 +1,3 @@
-from .cell import Cell
 
 class Grid(object):
     def __init__(self, grid_size, object):

@@ -21,7 +21,7 @@ class CellTestCase(unittest.TestCase):
 
 class GameBoardTestCase(unittest.TestCase):
     def setUp(self):
-        self.gameBoard = Grid(100, 100)
+        self.gameBoard = Grid((100, 100), Cell)
 
     def test_toggle_cell_in_board(self):
         self.gameBoard.getGridItem(50, 50).toggle_living()
