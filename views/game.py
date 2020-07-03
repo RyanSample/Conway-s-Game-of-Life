@@ -35,14 +35,10 @@ class GameView():
     #ToDo: break out the event system into its own function
     def update_screen(self, generation):
         """Checks for events and updates the screen at the end of each generation"""
-        #grid_size_x, grid_size_y = grid.get_size()
 
         for event in pygame.event.get(): # if an event in pygame close the window
             if event.type == pygame.QUIT:
                 return False
-                #sys.exit() # ToDo return an exit code and close the program from a controller, not a view...
-
-        #self.fill_screen(self.background_color) # redraw screen each generation
 
         self.update_text(generation)
         

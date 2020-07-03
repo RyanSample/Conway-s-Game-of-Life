@@ -13,6 +13,9 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/RyanSample/Conway-s-Game-of-Life.gitpip",
     packages=setuptools.find_packages(),
+    install_requires=[
+        'pygame==1.9.6',
+    ],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",

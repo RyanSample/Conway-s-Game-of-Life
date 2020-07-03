@@ -4,7 +4,7 @@ from views.game import GameView
 import sys
 import copy
 
-neighboring_cells = [(-1, -1), (-1, 0), (-1, 1),
+NEIGHBORING_CELLS = [(-1, -1), (-1, 0), (-1, 1),
                     (0, -1) ,          (0, 1),
                     (1, -1) , (1, 0) , (1, 1)
                    ]
@@ -21,15 +21,16 @@ class Game():
         self.view = GameView(window_size)
         self.empty_grid = Grid(self.grid_size, Cell)
         
-    def run_game(self, frames_per_second):
-        keep_displaying_window = True
+    def run_game(self, frames_per_second = 60, display_after_end_of_game = True):
+        """
+        Begins running the game at an optional delay and persists the window unless otherwise specified
+        """
+        keep_displaying_window = True         
         while (self.generation < self.max_generation) and keep_displaying_window:
             self.update_generation()
             keep_displaying_window = self.view.update_screen(self.generation)
-            #time.sleep(1/frames_per_second)
-
         
-        while(keep_displaying_window):
+        while(keep_displaying_window and display_after_end_of_game):
             keep_displaying_window = self.view.update_screen(self.generation)
 
         sys.exit()
@@ -60,10 +61,10 @@ class Game():
         self.generation += 1        
 
     def check_neighboring_living_cells(self, coordinates):
-        """Check neighboring cells to see if they ar living and return the number of living cells"""
+        """Check neighboring cells to see if they are living and return the number of living cells"""
         x, y = coordinates
         num_neighbors = 0
-        for neighbor_coordinates in neighboring_cells:
+        for neighbor_coordinates in NEIGHBORING_CELLS:
             neighbor_x, neighbor_y = neighbor_coordinates
             neighbor_x = (neighbor_x + x) % self.grid_size_x
             neighbor_y = (neighbor_y + y) % self.grid_size_y
@@ -73,7 +74,16 @@ class Game():
         return num_neighbors
 
     def load_coordinates_into_grid(self, coordinate_list):
-        """Takes a list of coordinates, a tuple(int x, int y), and sets the corresponding cell to living"""
+        """Takes a list of coordinates, a tuple(int x, int y), and sets the corresponding cell to living
+           Raises an IndexError if the coordinates are not
+        """
         for coordinate in coordinate_list:
             x, y = coordinate
-            self.game_board.getGridItem(x, y).toggle_living()
+            if(x < self.grid_size_x and x >= 0 and y < self.grid_size_y and y >= 0):
+                self.game_board.getGridItem(x, y).toggle_living()
+            else:
+                raise(IndexError)
+
+    def get_game_board(self):
+        """Returns the current generation's game board"""
+        return self.game_board
