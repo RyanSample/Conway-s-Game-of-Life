@@ -32,7 +32,6 @@ class GameView():
         """Fills the screen with the set background color"""
         self.screen.fill(self.background_color)
 
-    #ToDo: break out the event system into its own function
     def update_screen(self, generation):
         """Checks for events and updates the screen at the end of each generation"""
 
