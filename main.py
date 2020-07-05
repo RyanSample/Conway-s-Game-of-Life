@@ -1,12 +1,7 @@
-from models.grid import Grid
-from models.cell import Cell
-from views.game import GameView
-
 from game import Game
 
 import sys
-game_size = 85, 85
-window_size = tuple([5*x for x in game_size])
+game_size = 75, 75
 
 glider_coordinates = [
     (247,0),
@@ -39,9 +34,9 @@ glider_gun = [
 ]
 
 infinite_growth_pattern = [
-    (0,5), (2,4), (2,5), (4,1),
-    (4,2), (4,3), (6,0), (6,1),
-    (6,2), (7,1)
+    (20,25), (22,24), (22,25), (24,21),
+    (24,22), (24,23), (26,20), (26,21),
+    (26,22), (27,21)
 ]
 
 def main():
@@ -49,30 +44,5 @@ def main():
     gm.load_coordinates_into_grid(infinite_growth_pattern)
     gm.run_game(20)
 
-def test_view():
-    rows, columns = game_size
-    gv = GameView(window_size)
-    grid = Grid(rows, columns)
-    grid.getGridItem(213, 144).toggle_living()
-    grid.getGridItem(2,2).toggle_living()
-
-    while 1:
-        gv.update_screen(grid)
-
-def test_game():
-    gm = Game(game_size, 10000)
-    gm.load_coordinates_into_grid(infinite_growth_pattern)
-    gm.run_game(20)
-
-def test_carriage_return():
-    lst_of_strings = ["TEST1", "TEST2", "TEST3"]
-    for line in lst_of_strings:
-        print(line, end='\r')
-    #print(lst_of_strings, end='\r')
-    print("")
-
 if __name__ == "__main__":
-    #main()
-    #test_carriage_return()
-    #test_view()
-    test_game()
+    main()
