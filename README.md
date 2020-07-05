@@ -37,6 +37,29 @@ py setup.py install
 error: The 'pygame==1.9.6' distribution was not found and is required by Game-Of-Life
 ```
 
+## Running the program
+
+To run the program you can simply type 
+```
+py main.py
+```
+
+This will run the following main function 
+```
+def main():
+    gm = Game(game_size, 10000)
+    gm.load_coordinates_into_grid(infinite_growth_pattern)
+    gm.run_game(20)
+```
+
+1. This starts out by initializing a Game object which is passed a game size *tuple(int:size_x_axis, int:size_y_axis)* and the max number of generations, an int that will stop the game when that generation is reached. 
+* **WARNING** The larger you make the game, the slower it will run, because each cell will need to be checked each generation.
+
+1. The `Game.load_coordinates_into_grid()` function takes a list of coordinates and loads them into the Game's grid object. The coordinates are a tuple(int:x, int:y). Several other coordinate dictionaries representing different patterns are included in the main.py module and they can be passed to this function or you can create your own coordinate dictionaries and load them into the game!
+
+1. Finally the `gm.run_game(int:frames_per_second)` function is responsible for running the game which will launch a window
+which initializes a Game object and then loads a dictionary of coordinates
+
 ## Running the tests
 
 Run tests by navigating to their directory and running the following command:
