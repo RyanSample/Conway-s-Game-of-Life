@@ -15,6 +15,8 @@ To install the dependencies required to run this program, navigate to the projec
 pip install -r requirements.txt 
 ```
 
+This will install `pygame==1.9.6` and its dependencies.
+
 ### Installation
 
 *This is a work in progress, currently there are issues installing this application due to an issue with pygame's dependencies*
