@@ -3,6 +3,7 @@ from models.cell import Cell
 from views.game import GameView
 import sys
 import copy
+import time
 
 NEIGHBORING_CELLS = [(-1, -1), (-1, 0), (-1, 1),
                     (0, -1) ,          (0, 1),
@@ -21,14 +22,15 @@ class Game():
         self.view = GameView(window_size)
         self.empty_grid = Grid(self.grid_size, Cell)
         
-    def run_game(self, frames_per_second = 60, display_after_end_of_game = True):
+    def run_game(self, frames_per_second = 100, display_after_end_of_game = True):
         """
-        Begins running the game at an optional delay and persists the window unless otherwise specified
+        Begins running the game at an optional delay and persists the window unless display_after_end_of_game is False
         """
         keep_displaying_window = True         
         while (self.generation < self.max_generation) and keep_displaying_window:
             self.update_generation()
             keep_displaying_window = self.view.update_screen(self.generation)
+            time.sleep(1/frames_per_second)
         
         while(keep_displaying_window and display_after_end_of_game):
             keep_displaying_window = self.view.update_screen(self.generation)
